@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Montañas rusas:</h1>
+
+    <p>Presiona una tecla...</p>
+
+    <ul id="coasters"></ul>
+
+    <script>
+
+        document.onkeyup = () => {
+
+            fetch('https://coasters-api.herokuapp.com/')
+                .then(response => response.json())
+                .then(data => {
+
+                    document.querySelector('p').style.display = 'none'
+
+                    let result = ''
+
+                    data.forEach(elm => result += `<li>${elm.name}: altura ${elm.height} metros</li>`)
+
+                    document.querySelector('#coasters').innerHTML += result
+                })
+                .catch(err => consoel.log('ERROR!', err))
+        }
+
+    </script>
+</body>
+
+</html>
